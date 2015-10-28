@@ -1,0 +1,55 @@
+[*] Main idea:
+
+- Define variables with the RGB of red, black, white, etc.
+- Draw a white canvas
+- A snake consists of blocks, size 10 each for our example
+- Two loop controllers: game over and game loop.
+-- If game over is true, present a message either to continue or to quit.
+   In order to continue, reset the game to its initial status (begining of
+   game loop).
+-- Game loop will control most of the game's logic. It will handle the
+   events of key up and down, which keys are pressed and perform the action
+   accordingly.
+--- Key up: move the head_y -= 10
+--- Key down: move the head_y += 10
+--- Key left: move the head_x -= 10
+--- Key down: move the head_x += 10 (in fact, block size)
+--- Important to note here: when moving head_x, set head_y = 0 to avoid
+    a diagonal movement and vice-versa.
+
+- Define boundaries: if snake's head position => X or Y of the canvas, die.
+
+- Clock tick: set a "delay" in the clock tick of the game, otherwise it
+  will be super fast and unable to control.
+
+- Apple: its (X, Y) has to be in a multiple of 10 in order to be aligned
+with the snake, as the snake location is always a round of 10 too. Apple's
+location is randomly generated and susequently rounded to the next 10.
+
+>>> x = 43
+>>> round(x/10.0)*10.0
+40.0
+
+
+- Snake: the implementation of a snake is a list of lists. So each list
+has an (X, Y) to represent a block, and a combination of them makes up for
+a snake.
+
+
+- Eating the apple:
+  - If (X, Y) of the snake = (X, Y) of the apple -> eat!
+  - By eating it means the original apple disappears and a new one is
+    randomly drawn on the screen. Also, the snake grows by one block.
+
+
+[*] Things to remember:
+- Everytime we want to write something on the screen we have to update it
+  with pygame.display.update()
+
+
+[*] PyGame useful functions:
+
+pygame.draw.rect(screen, color, [x, y, width, height], alpha)
+font = pygame.font.SysFont(None, size)
+font.render(msg, True, color) # message, boolean, tuple with color
+gameDisplay.blit(screen_text, [width, height]) # screen_text = font.render
